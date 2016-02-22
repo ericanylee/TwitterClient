@@ -15,13 +15,14 @@ class tweetCell: UITableViewCell {
     @IBOutlet weak var userScreenNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
-    
+    @IBOutlet weak var favoritesLabel: UILabel!
+    @IBOutlet weak var retweetsLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         profileImageView.layer.cornerRadius = 5 // make image rounder
         profileImageView.clipsToBounds = true //clip to bitmap
-    
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

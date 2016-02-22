@@ -11,7 +11,8 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var tweets: [Tweet]!
-    
+    var favorites = 1
+    var retweets = 1
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -21,6 +22,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             //for tweet in tweets{
             //    print(tweet.text)
             //}
+            
+            self.tableView.reloadData()
             }, failure: { (error: NSError) -> () in
                 print(error.localizedDescription)
         })
@@ -47,17 +50,21 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         cell.userNameLabel.text = tweet.userName
         cell.userScreenNameLabel.text = tweet.userScreenName
-        let formatter = NSDateFormatter()
-        cell.timeLabel.text = formatter.stringFromDate(tweet.timeStamp!)
+        cell.timeLabel.text = String(tweet.timeStamp!)
         cell.tweetTextLabel.text = tweet.text
-        let profileUrlString = tweet.profileImageURL as? String // can be a nil
-        if let profileUrlString = profileUrlString{
-            cell.profileImageView.setImageWithURL(NSURL(string: profileUrlString)!)
-        }
-        else {
-            cell.profileImageView.image = nil
-        }
-        print(tweet.userName)
+        //let profileUrlString = tweet.profileImageURL as? String // can be a nil
+        //if let profileUrlString = profileUrlString{
+            cell.profileImageView.setImageWithURL(tweet.profileImageURL!)
+        //}
+        //else {
+            //cell.profileImageView.image = nil
+        //}
+        cell.favoritesLabel.text = "\(tweet.favoritesCount)"
+        cell.retweetsLabel.text = "\(tweet.retweetCount)"
+        //cell.favoritesImageView.image = UIImage(named: "DefaultFavorite")
+       // cell.retweetsImageView.image = UIImage(named: "DefaultRetweet")
+        //cell.favoritesImageView.frame = CGRectMake(0,0,100,100)
+       // cell.retweetsImageView.frame = CGRectMake(0,0,100,100)
         return cell
     }
     
@@ -67,6 +74,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onFavoriteButton(sender: UIButton) {
+        tableView.reloadData()
+    }
+
+    @IBAction func onRetweetButton(sender: AnyObject) {
+        tableView.reloadData()
+    }
     @IBAction func onLogOutButon(sender: AnyObject) {
         TwitterClient.sharedInstance.logout()
     }
