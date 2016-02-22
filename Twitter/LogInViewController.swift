@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 class LogInViewController: UIViewController {
 
@@ -20,8 +21,23 @@ class LogInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    @IBAction func onLogin(sender: AnyObject) {
+       let client = TwitterClient.sharedInstance
+        client.login({ () -> () in
+            //if successful run this block of code
+            print("I've logged in!")
+            }) { (error: NSError!) -> () in
+                // if failure, run this block of code 
+                print("error : \(error.localizedDescription)")
+        }
+        
 
+
+    }
+
+    
+}
+    
     /*
     // MARK: - Navigation
 
@@ -32,4 +48,4 @@ class LogInViewController: UIViewController {
     }
     */
 
-}
+

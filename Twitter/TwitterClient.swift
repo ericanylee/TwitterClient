@@ -7,7 +7,75 @@
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 class TwitterClient: BDBOAuth1SessionManager {
+    
+    //static is the same as class, except it won't be overwritten
+    static var sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com"),
+        consumerKey: "uaQWWvD1okO8wibdrXUuxEJC2",
+        consumerSecret: "cew9xTmT25ylM0SzBGrm9KcGTUZqOqerLDFozHQ3nSAZYnGlMp")
+
+    var loginSuccess: (() -> ())? // may or may not have log in success
+    var loginFailure: ((NSError) -> ())?
+    
+    func login(success: () -> (), failure: (NSError) -> ()){ //look up closure types and syntaxes later
+        loginSuccess = success
+        loginFailure = failure
+        TwitterClient.sharedInstance.deauthorize()
+        TwitterClient.sharedInstance.fetchRequestTokenWithPath("oauth/request_token", method: "GET",
+            callbackURL: NSURL(string:"twitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
+                // when request token succeeds the following code gets executed
+                //print("Got the request token")
+                let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                UIApplication.sharedApplication().openURL(authURL!) //if you don't open https... it might open different app
+                
+                
+            }) { (error: NSError!) -> Void in
+                print("error:\(error.localizedDescription)")
+                self.loginFailure?(error) // pass along the error received.. if log in failure is nil question mark is needed 
+        }
+    }
+    func handleOpenUrl(url: NSURL){
+        let requestToken = BDBOAuth1Credential(queryString: url.query)
+        fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) -> Void in
+            //print("I got the access token!")
+            
+            self.loginSuccess?()
+            }) { (error: NSError!) -> Void in
+                print("Error! \(error.localizedDescription)")
+            self.loginFailure?(error)
+        }
+    }
+    
+    func homeTimeline(success: ([Tweet]) -> (), failure: (NSError)->()){
+
+        GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dictionaries)
+            
+            success(tweets) // on success, returns tweets 
+            //tweets are array of NSDictionaries
+            //for tweet in tweets{
+            //print("\(tweet.text)!")
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        })
+    }
+    
+    func currentAccount(){
+        GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            //print("account: \(response)")
+            let userDictionary = response as! NSDictionary
+            let user = User(dictionary: userDictionary)
+            
+            print("user name : \(user.name)")
+            print("user screen name : \(user.screenname)")
+            print("user description : \(user.tagline)")
+            
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+        })
+    }
+    
 
 }
