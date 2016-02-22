@@ -15,6 +15,7 @@ class User: NSObject {
     var screenname: NSString?
     var profileUrl: NSURL?
     var tagline: NSString?
+    static let userDidLogoutNotification = "UserDidLogout"
     
     var dictionary: NSDictionary?
     

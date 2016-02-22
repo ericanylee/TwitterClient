@@ -10,7 +10,7 @@ import UIKit
 import BDBOAuth1Manager
 
 class TwitterClient: BDBOAuth1SessionManager {
-    
+        
     //static is the same as class, except it won't be overwritten
     static var sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com"),
         consumerKey: "uaQWWvD1okO8wibdrXUuxEJC2",
@@ -36,6 +36,16 @@ class TwitterClient: BDBOAuth1SessionManager {
                 self.loginFailure?(error) // pass along the error received.. if log in failure is nil question mark is needed 
         }
     }
+    
+    func logout(){
+        User.currentUser = nil
+       deauthorize()
+        //need to go back to the log in page
+        NSNotificationCenter.defaultCenter().postNotificationName(User.userDidLogoutNotification, object: nil)
+        
+        
+    }
+    
     func handleOpenUrl(url: NSURL){
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) -> Void in
