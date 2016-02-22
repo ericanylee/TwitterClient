@@ -47,6 +47,7 @@ class User: NSObject {
         }
 
         set (user){
+            _currentUser = user
             let defaults = NSUserDefaults.standardUserDefaults()
             if let user = user {
                 let data = try! NSJSONSerialization.dataWithJSONObject(user.dictionary!, options: []) //[] default options
