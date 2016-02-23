@@ -11,8 +11,7 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var tweets: [Tweet]!
-    var favorites = 1
-    var retweets = 1
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -47,7 +46,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! tweetCell
         let tweet = tweets[indexPath.row]
-        
+        cell.tweet = tweets![indexPath.row]
         cell.userNameLabel.text = tweet.userName
         cell.userScreenNameLabel.text = tweet.userScreenName
         cell.timeLabel.text = String(tweet.timeStamp!)
@@ -72,14 +71,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func onFavoriteButton(sender: UIButton) {
-        tableView.reloadData()
-    }
-
-    @IBAction func onRetweetButton(sender: AnyObject) {
-        tableView.reloadData()
     }
     @IBAction func onLogOutButon(sender: AnyObject) {
         TwitterClient.sharedInstance.logout()

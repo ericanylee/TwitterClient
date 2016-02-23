@@ -11,9 +11,10 @@ import BDBOAuth1Manager
 
 class LogInViewController: UIViewController {
 
+    @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        logoImageView.image = UIImage(named: "Logo.png")
         // Do any additional setup after loading the view.
     }
 
