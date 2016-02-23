@@ -59,7 +59,7 @@ I had the hardest time trying to figure out how to update the favorites and retw
     limitations under the License.
     
     
-    # Project 5 - MockTwitter
+# Project 5 - MockTwitter
 
 Time spent: 10 hours spent in total
 
