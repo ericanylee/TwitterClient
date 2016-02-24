@@ -95,5 +95,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func retweet(success: (User) -> (), failure: (NSError) ->()){
+        
+    }
 
 }
