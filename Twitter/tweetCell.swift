@@ -19,18 +19,10 @@ class tweetCell: UITableViewCell {
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
-    var retweeted : BooleanType = false
-    var favorited : BooleanType = false
-    var retweet : Int!
-    var favorite : Int!
     
-    var tweet: Tweet! {
-        didSet {
-            favorite = tweet.favoritesCount
-            retweet = tweet.retweetCount
-        }
-    }
-    
+    var tweet: Tweet?
+    var viewController: UIViewController?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -43,34 +35,43 @@ class tweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     @IBAction func favoriteOnButton(sender: AnyObject) {
-        if favorited { //was already favorited
-            favorited = false
-            favoriteButton.setImage(UIImage(named: "unfavorited.png"), forState: UIControlState.Normal)
-            favorite = favorite - 1
-            favoritesLabel.text = "\(favorite)"
-        }
-        else { // favorited!
-            favorited = true
-            favoriteButton.setImage(UIImage(named: "favorited.png"), forState: UIControlState.Normal)
-            favorite = favorite + 1
-            favoritesLabel.text = "\(favorite)"
+        if tweet!.favorited!{// if it was already favorited, clicking on it is unfavoriting it..
+            TwitterClient.sharedInstance.unfavorite(withID: tweet!.id!, complete: { (response, error) -> Void in
+                self.tweet?.favoritesCount = self.tweet!.favoritesCount!.integerValue - 1
+                self.favoritesLabel.text = self.tweet?.favoritesCount!.description
+                self.tweet?.favorited = false
+                self.favoriteButton.setImage(UIImage(named: "unfavorited.png"), forState: .Normal)
+                
+            })
+        } else { //favoring action
+            TwitterClient.sharedInstance.favorite(withID: tweet!.id!, complete: { (response, error) -> Void in
+                self.tweet?.favoritesCount = self.tweet!.favoritesCount!.integerValue + 1
+                self.favoritesLabel.text = self.tweet?.favoritesCount?.description
+                self.tweet?.favorited = true
+                self.favoriteButton.setImage(UIImage(named: "favorited.png"), forState: .Normal)
+
+            })
         }
     }
 
     @IBAction func retweetOnButton(sender: AnyObject) {
-        if retweeted { //was already favorited
-            retweeted = false
-            retweetButton.setImage(UIImage(named: "defaultretweet.png"), forState: UIControlState.Normal)
-            retweet = retweet - 1
-            retweetsLabel.text = "\(retweet)"
-        }
-        else { // favorited!
-            retweeted = true
-            retweetButton.setImage(UIImage(named: "retweeted.png"), forState: UIControlState.Normal)
-            retweet = retweet + 1
-            retweetsLabel.text = "\(retweet)"
+        
+        if tweet!.retweeted!{// if it was already retweeted, clicking on it is unretweeting it..
+            TwitterClient.sharedInstance.unretweet(withID: tweet!.id!, complete: { (response, error) -> Void in
+                self.tweet?.retweetCount = self.tweet!.retweetCount!.integerValue - 1
+                self.retweetsLabel.text = self.tweet?.retweetCount!.description
+                self.tweet?.retweeted = false
+                self.retweetButton.setImage(UIImage(named: "defaultretweet.png"), forState: .Normal)
+            })
+        } else { //retweeting action
+            TwitterClient.sharedInstance.retweet(withID: tweet!.id!, complete: { (response, error) -> Void in
+                self.tweet?.retweetCount = self.tweet!.retweetCount!.integerValue + 1
+                self.retweetsLabel.text = self.tweet?.retweetCount!.description
+                self.tweet?.retweeted = true
+                self.retweetButton.setImage(UIImage(named: "retweeted.png"), forState: .Normal)
+            })
         }
     }
-    
 }

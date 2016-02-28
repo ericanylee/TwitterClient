@@ -94,9 +94,61 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error)
         })
     }
-    
-    func retweet(success: (User) -> (), failure: (NSError) ->()){
-        
+
+    func retweet(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
+        let parameter: NSDictionary = ["id": id]
+        POST("1.1/statuses/retweet/\(id).json", parameters: parameter, progress: { (progress) -> Void in
+            
+            }, success: { (task, response) -> Void in
+                complete(response: response as? NSDictionary, error: nil)
+            }) { (task, error) -> Void in
+                complete(response: nil, error: error)
+        }
+        print("retweeted")
     }
 
+    func unretweet(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
+        let parameter: NSDictionary = ["id": id]
+        POST("1.1/statuses/unretweet/\(id).json", parameters: parameter, progress: { (progress) -> Void in
+            }, success: { (task, response) -> Void in
+                complete(response: response as? NSDictionary, error: nil)
+            }) { (task, error) -> Void in
+                complete(response: nil, error: error)
+        }
+        print("unretweeted")
+    }
+    
+    func favorite(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
+        let parameter: NSDictionary = ["id": id]
+        print("beforefavorite")
+        POST("1.1/favorites/create.json", parameters: parameter, progress: { (progress) -> Void in
+            }, success: { (task, response) -> Void in
+                complete(response: response as? NSDictionary, error: nil)
+            }) { (task, error) -> Void in
+                complete(response: nil, error: error)
+        }
+        print("favorited")
+    }
+    
+    func unfavorite(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
+        let parameter: NSDictionary = ["id": id]
+        POST("1.1/favorites/destroy.json", parameters: parameter, progress: { (progress) -> Void in
+            }, success: { (task, response) -> Void in
+                complete(response: response as? NSDictionary, error: nil)
+            }) { (task, error) -> Void in
+                complete(response: nil, error: error)
+        }
+        print("unfavorited")
+    }
+    
+    func postTweet(parameters:NSDictionary, complete: (response: NSDictionary?, error: NSError?) -> Void) {
+        POST("1.1/statuses/update.json", parameters: parameters, progress: { (progress) -> Void in
+            }, success: { (task, response) -> Void in
+                complete(response: response as? NSDictionary, error: nil)
+            }) { (task, error) -> Void in
+                complete(response: nil, error: error)
+                
+        }
+    }
+    
 }

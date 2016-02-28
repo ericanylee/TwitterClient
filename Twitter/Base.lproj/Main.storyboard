@@ -270,20 +270,20 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.61175710689999996" green="0.82451296019999998" blue="0.92615701900000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMq-eB-EfN">
-                                <rect key="frame" x="129" y="304" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-8G-at3">
+                                <rect key="frame" x="272" y="301" width="28" height="28"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-8G-at3">
-                                <rect key="frame" x="254" y="304" width="46" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Button" image="unfavorited.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuR-Yq-a9y">
                                 <rect key="frame" x="12" y="301" width="28" height="28"/>
                                 <animations/>
                                 <state key="normal" title="Button" image="replyDefault.png"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMq-eB-EfN">
+                                <rect key="frame" x="146" y="301" width="28" height="28"/>
+                                <animations/>
+                                <state key="normal" title="Button" image="defaultretweet.png"/>
                             </button>
                         </subviews>
                         <animations/>

@@ -18,10 +18,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
             self.tweets = tweets
-            //for tweet in tweets{
-            //    print(tweet.text)
-            //}
-            
             self.tableView.reloadData()
             }, failure: { (error: NSError) -> () in
                 print(error.localizedDescription)
@@ -46,24 +42,40 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! tweetCell
         let tweet = tweets[indexPath.row]
-        cell.tweet = tweets![indexPath.row]
+        let user = tweet.user
+        cell.tweet = tweet
         cell.userNameLabel.text = tweet.userName
-        cell.userScreenNameLabel.text = tweet.userScreenName
+        cell.userScreenNameLabel.text = "@\(tweet.userScreenName)"
         cell.timeLabel.text = String(tweet.timeStamp!)
+        cell.profileImageView.setImageWithURL(tweet.profileImageURL!)
+        cell.viewController = self
         cell.tweetTextLabel.text = tweet.text
-        //let profileUrlString = tweet.profileImageURL as? String // can be a nil
-        //if let profileUrlString = profileUrlString{
-            cell.profileImageView.setImageWithURL(tweet.profileImageURL!)
-        //}
-        //else {
-            //cell.profileImageView.image = nil
-        //}
-        cell.favoritesLabel.text = "\(tweet.favoritesCount)"
-        cell.retweetsLabel.text = "\(tweet.retweetCount)"
-        //cell.favoritesImageView.image = UIImage(named: "DefaultFavorite")
-       // cell.retweetsImageView.image = UIImage(named: "DefaultRetweet")
-        //cell.favoritesImageView.frame = CGRectMake(0,0,100,100)
-       // cell.retweetsImageView.frame = CGRectMake(0,0,100,100)
+
+        //calculate how many hours passed since timestamp from tweet
+        let time = Int((tweet.timeStamp!.timeIntervalSinceNow))
+        let hours = -time / 3600
+        cell.timeLabel.text = "\(hours)h"
+        
+        if tweet.retweetCount == 0 {
+            cell.retweetsLabel.text = ""
+        } else {
+            cell.retweetsLabel.text = tweet.retweetCount?.description
+        }
+        
+        if tweet.favoritesCount == 0 {
+            cell.favoritesLabel.text = ""
+        } else {
+            cell.favoritesLabel.text = tweet.favoritesCount?.description
+        }
+
+        if tweet.retweeted!{
+            cell.retweetButton.setImage(UIImage(named: "retweeted.png"), forState: .Normal)
+        }
+        
+        if tweet.favorited! {
+            cell.favoriteButton.setImage(UIImage(named: "favorited.png"), forState: .Normal)
+        }
+
         return cell
     }
     
