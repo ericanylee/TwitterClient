@@ -73,6 +73,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Im6-qn-OvX">
                                                     <rect key="frame" x="8" y="8" width="40" height="40"/>
                                                     <animations/>
+                                                    <gestureRecognizers/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="userName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK7-gV-vt5">
                                                     <rect key="frame" x="56" y="0.0" width="94" height="21"/>
@@ -151,7 +152,7 @@
                                             <outlet property="tweetTextLabel" destination="qE5-7f-e9q" id="8LN-eG-Uco"/>
                                             <outlet property="userNameLabel" destination="dK7-gV-vt5" id="72U-Au-1Ym"/>
                                             <outlet property="userScreenNameLabel" destination="3Dx-Nu-NmD" id="1P4-38-eVz"/>
-                                            <segue destination="A8S-tn-AdO" kind="push" id="Bbi-1t-qiB"/>
+                                            <segue destination="A8S-tn-AdO" kind="push" identifier="detailsPage" id="Bbi-1t-qiB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -197,10 +198,10 @@
             </objects>
             <point key="canvasLocation" x="994" y="295"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="flj-v4-Ahf">
             <objects>
-                <viewController id="WaO-Gr-L1s" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileViewController" id="WaO-Gr-L1s" customClass="profileViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oic-GI-bOJ"/>
                         <viewControllerLayoutGuide type="bottom" id="G7R-hX-q5R"/>
@@ -214,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvF-Bg-MoF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1499" y="916"/>
+            <point key="canvasLocation" x="994" y="933"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="4eY-QA-LQ8">
