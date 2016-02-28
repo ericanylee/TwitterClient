@@ -45,7 +45,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let user = tweet.user
         cell.tweet = tweet
         cell.userNameLabel.text = tweet.userName
-        cell.userScreenNameLabel.text = "@\(tweet.userScreenName)"
+        cell.userScreenNameLabel.text = "@\(tweet.userScreenName!)"
         cell.timeLabel.text = String(tweet.timeStamp!)
         cell.profileImageView.setImageWithURL(tweet.profileImageURL!)
         cell.viewController = self
@@ -76,6 +76,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             cell.favoriteButton.setImage(UIImage(named: "favorited.png"), forState: .Normal)
         }
 
+        
         return cell
     }
     

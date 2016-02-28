@@ -104,7 +104,6 @@ class TwitterClient: BDBOAuth1SessionManager {
             }) { (task, error) -> Void in
                 complete(response: nil, error: error)
         }
-        print("retweeted")
     }
 
     func unretweet(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
@@ -115,19 +114,16 @@ class TwitterClient: BDBOAuth1SessionManager {
             }) { (task, error) -> Void in
                 complete(response: nil, error: error)
         }
-        print("unretweeted")
     }
     
     func favorite(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
         let parameter: NSDictionary = ["id": id]
-        print("beforefavorite")
         POST("1.1/favorites/create.json", parameters: parameter, progress: { (progress) -> Void in
             }, success: { (task, response) -> Void in
                 complete(response: response as? NSDictionary, error: nil)
             }) { (task, error) -> Void in
                 complete(response: nil, error: error)
         }
-        print("favorited")
     }
     
     func unfavorite(withID id:NSNumber, complete: (response: NSDictionary?, error: NSError?) -> Void) {
@@ -138,7 +134,6 @@ class TwitterClient: BDBOAuth1SessionManager {
             }) { (task, error) -> Void in
                 complete(response: nil, error: error)
         }
-        print("unfavorited")
     }
     
     func postTweet(parameters:NSDictionary, complete: (response: NSDictionary?, error: NSError?) -> Void) {

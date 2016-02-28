@@ -25,14 +25,14 @@ class Tweet: NSObject {
     init(dictionary: NSDictionary){
         text = dictionary["text"] as? String
         retweetCount = dictionary["retweet_count"] as? NSNumber
-        favoritesCount = dictionary["favourites_count"] as? NSNumber
-        
-        let retweeted_status = dictionary["retweeted_status"]
+        favoritesCount = dictionary["favorite_count"] as? NSNumber // THE API KEY HERE IS WRONG
+        id = dictionary["id"] as? NSNumber
+        /*let retweeted_status = dictionary["retweeted_status"]
         if let retweeted_status = retweeted_status as? NSDictionary {
-            favoritesCount = retweeted_status["favorite_count"] as? NSNumber
+            favoritesCount = retweeted_status["favourites_count"] as? NSNumber
             
         }
-
+        */
         let timestampString = (dictionary["created_at"] as? String)
         
         if let timestampString = timestampString{
