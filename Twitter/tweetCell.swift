@@ -46,16 +46,7 @@ class tweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-/*
-    func loadGestureRecognizer() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "onProfileImage")
-        profileImageView.addGestureRecognizer(gestureRecognizer)
-    }
-    
-    func onProfile() {
-        viewController?.performSegueWithIdentifier("profilePage", sender: tweet?.user)
-    }
-    */
+
     @IBAction func favoriteOnButton(sender: AnyObject) {
         if tweet!.favorited!{// if it was already favorited, clicking on it is unfavoriting it..
             TwitterClient.sharedInstance.unfavorite(withID: tweet!.id!, complete: { (response, error) -> Void in

@@ -80,7 +80,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         //calculate how many hours passed since timestamp from tweet
         let time = Int((tweet.timeStamp!.timeIntervalSinceNow))
         let hours = -time / 3600
-        cell.timeLabel.text = "\(hours)h"
+        if hours <= 24 {
+            cell.timeLabel.text = "\(hours)h"
+        }
+        else { //have to format it to days
+            let days = hours / 24
+            cell.timeLabel.text = "\(days)d"
+        }
         
         if tweet.retweetCount == 0 {
             cell.retweetsLabel.text = ""
