@@ -14,7 +14,12 @@ class User: NSObject {
     var name: NSString? //optional : can potentially be blank
     var screenname: NSString?
     var profileUrl: NSURL?
+    var numTweets: NSNumber?
+    var numFollowing: NSNumber?
+    var numFollowers: NSNumber?
     var tagline: NSString?
+    var location: NSString?
+
     static let userDidLogoutNotification = "UserDidLogout"
     
     var dictionary: NSDictionary?
@@ -24,6 +29,10 @@ class User: NSObject {
         self.dictionary = dictionary
         name = dictionary["name"] as? String // attempt to cast it as a string
         screenname = dictionary["screen_name"] as? String
+        numTweets = dictionary["statuses_count"] as? NSNumber
+        numFollowing = dictionary["following"] as? NSNumber
+        numFollowers = dictionary["followers_count"] as? NSNumber
+        location = dictionary["location"] as? String
         let profileUrlString = dictionary["profile_image_url_https"] as? String // can be a nil
         if let profileUrlString = profileUrlString{
             profileUrl = NSURL(string: profileUrlString)

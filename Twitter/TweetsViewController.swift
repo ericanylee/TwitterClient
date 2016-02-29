@@ -12,7 +12,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     var tweets: [Tweet]!
 
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var screenName: UILabel!
+    @IBOutlet weak var numTweets: UILabel!
+    @IBOutlet weak var numFollowing: UILabel!
+    @IBOutlet weak var numFollowers: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +32,22 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        userName.text = User._currentUser!.name as! String
+        let imageUrl = User._currentUser?.profileUrl
+        if let imageUrl = imageUrl {
+            profileImage.setImageWithURL(imageUrl)
+        }
+        else{
+            profileImage = nil
+        }
 
+        screenName.text = User._currentUser!.screenname as! String
+        numTweets.text = User._currentUser!.numTweets?.description
+        numFollowers.text = User._currentUser!.numFollowers?.description
+        numFollowing.text = User._currentUser!.numFollowing?.description
+        
     }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if tweets != nil{
@@ -37,6 +57,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             return 0
         }
     }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        let tweet = tweets![indexPath.row]
+        performSegueWithIdentifier("detailsPage", sender: tweet)
+
+    }
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
@@ -92,21 +118,19 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
-        print("Segue entered")
+
         if segue.identifier == "detailsPage" {
             let detailViewController = segue.destinationViewController as! detailsViewController
-            let cell = sender as! UITableViewCell
+            /*let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let tweet = tweets![indexPath!.row]
-            print(tweet)
-            detailViewController.tweet = tweet
+            let tweet = tweets![indexPath!.row]*/
+            //print(sender)
+            detailViewController.tweet = sender as? Tweet
 
         } else if segue.identifier == "profilePage" {
             let detailViewController = segue.destinationViewController as! profileViewController
             detailViewController.user = sender as? User
-            detailViewController.tweet = sender as? Tweet
         }
-        print("where is the segue going")
     }
     
 

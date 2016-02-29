@@ -26,6 +26,8 @@
 		07973A321C7D40B10028C139 /* replyDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 07973A311C7D40B10028C139 /* replyDefault.png */; };
 		07973A341C7D40BF0028C139 /* replyActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 07973A331C7D40BF0028C139 /* replyActive.png */; };
 		07973A5D1C82FD7B0028C139 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07973A5C1C82FD7A0028C139 /* profileViewController.swift */; };
+		07973A5F1C8372120028C139 /* profileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07973A5E1C8372120028C139 /* profileCell.swift */; };
+		07973A611C8387170028C139 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07973A601C8387170028C139 /* ComposeViewController.swift */; };
 		69BFF8CD916D1F61040FBFD1 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D95251F4C2F5415F756E96 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		07973A311C7D40B10028C139 /* replyDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replyDefault.png; sourceTree = "<group>"; };
 		07973A331C7D40BF0028C139 /* replyActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replyActive.png; sourceTree = "<group>"; };
 		07973A5C1C82FD7A0028C139 /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
+		07973A5E1C8372120028C139 /* profileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileCell.swift; sourceTree = "<group>"; };
+		07973A601C8387170028C139 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		28D95251F4C2F5415F756E96 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA2AF76F849F844C60916AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		54ACD50294EC56072FD3C9DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +87,9 @@
 				077E94551C7AA8CC0017B1A0 /* TweetsViewController.swift */,
 				07973A2F1C7D3BA40028C139 /* detailsViewController.swift */,
 				07973A5C1C82FD7A0028C139 /* profileViewController.swift */,
+				077E94571C7AC8A90017B1A0 /* tweetCell.swift */,
+				07973A5E1C8372120028C139 /* profileCell.swift */,
+				07973A601C8387170028C139 /* ComposeViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -130,7 +137,6 @@
 				078FF0E11C7395470095099C /* AppDelegate.swift */,
 				078FF0E51C7395470095099C /* Main.storyboard */,
 				078FF0E81C7395470095099C /* Assets.xcassets */,
-				077E94571C7AC8A90017B1A0 /* tweetCell.swift */,
 				078FF0EA1C7395470095099C /* LaunchScreen.storyboard */,
 				078FF0ED1C7395470095099C /* Info.plist */,
 			);
@@ -289,9 +295,11 @@
 				070B77A11C73FD7000F4E929 /* TwitterClient.swift in Sources */,
 				07973A301C7D3BA40028C139 /* detailsViewController.swift in Sources */,
 				077E94541C7A93B80017B1A0 /* Tweet.swift in Sources */,
+				07973A611C8387170028C139 /* ComposeViewController.swift in Sources */,
 				077E94561C7AA8CC0017B1A0 /* TweetsViewController.swift in Sources */,
 				077E94521C7A93AD0017B1A0 /* User.swift in Sources */,
 				078FF0E21C7395470095099C /* AppDelegate.swift in Sources */,
+				07973A5F1C8372120028C139 /* profileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

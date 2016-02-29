@@ -78,6 +78,21 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func userTimeLine(parameters: NSDictionary? ,success: ([Tweet]) -> (), failure: (NSError)->()) {
+        
+        
+        GET("1.1/statuses/user_timeline.json", parameters: parameters, progress: { (progress: NSProgress) -> Void in
+            }, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                //print(response)
+                let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+                success(tweets)
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print(error)
+                failure(error)
+        })
+    }
+    
+    
     func currentAccount(success: (User) -> (), failure: (NSError)->()){
         GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             //print("account: \(response)")
@@ -85,10 +100,6 @@ class TwitterClient: BDBOAuth1SessionManager {
             let user = User(dictionary: userDictionary)
             
             success(user)
-            
-            print("user name : \(user.name)")
-            print("user screen name : \(user.screenname)")
-            print("user description : \(user.tagline)")
             
             }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
             failure(error)
