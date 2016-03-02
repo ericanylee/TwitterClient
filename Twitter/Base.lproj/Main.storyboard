@@ -471,20 +471,19 @@
                                     <action selector="onPost:" destination="AK0-zA-SdI" eventType="touchUpInside" id="5h4-c5-Lm9"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3Hy-BH-8M2">
-                                <rect key="frame" x="20" y="122" width="280" height="146"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WMd-ce-dJE">
+                                <rect key="frame" x="20" y="117" width="280" height="174"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="SRb-32-vr1"/>
                     <connections>
-                        <outlet property="textBox" destination="3Hy-BH-8M2" id="opE-Gv-BjX"/>
+                        <outlet property="textBox" destination="WMd-ce-dJE" id="hxA-72-cnc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCT-Uv-Ild" userLabel="First Responder" sceneMemberID="firstResponder"/>

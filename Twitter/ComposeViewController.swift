@@ -10,7 +10,8 @@ import UIKit
 
 class ComposeViewController: UIViewController {
 
-    @IBOutlet weak var textBox: UITextView!
+    @IBOutlet weak var textBox: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,11 +24,13 @@ class ComposeViewController: UIViewController {
     }
     
     @IBAction func onPost(sender: AnyObject) {
-
+        let parameters: NSDictionary = ["status": textBox.text!]
+        TwitterClient.sharedInstance.postTweet(parameters) { (response, error) -> Void in
+        }
     }
 
     @IBAction func onCancel(sender: AnyObject) {
- 
+         dismissViewControllerAnimated(true, completion: nil)
     }
     /*
     // MARK: - Navigation
